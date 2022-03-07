@@ -11,7 +11,7 @@ interface Rating {
   ratingDescription: string
 }
 
-const calculateExercises = (data: Array<number>, target: number): Result => {
+export const calculator = (data: Array<number>, target: number): Result => {
   const periodLength = data.length;
   const trainingDays = data.filter(day => day > 0).length;
   const average = data.reduce((partialSum, a) => partialSum + a, 0) / periodLength
@@ -65,7 +65,7 @@ const parseArgs = (args: Array<string>): { data: Array<number>, target: number }
 
 try {
   const { data, target } = parseArgs(process.argv)
-  console.log(calculateExercises(data, target))
+  console.log(calculator(data, target))
 } catch (error) {
   let errorMessage = 'Something bad happened. '
   if (error instanceof Error) {
@@ -73,4 +73,5 @@ try {
   }
   console.log(errorMessage);
 }
+
 

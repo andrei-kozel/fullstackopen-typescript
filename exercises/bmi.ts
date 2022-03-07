@@ -1,4 +1,5 @@
-type Result = string;
+type BmiResult = string;
+
 interface DataValues {
   weight: number
   height: number
@@ -18,7 +19,7 @@ const parseArguments = (args: Array<string>): DataValues => {
   }
 }
 
-const calculateBmi = (height: number, weight: number): Result => {
+export const calculateBmi = (height: number, weight: number): BmiResult => {
   const bmi = weight / (height * height) * 10000;
 
   switch (true) {
@@ -40,6 +41,8 @@ try {
   let errorMessage = 'Something bad happened. '
   if (error instanceof Error) {
     errorMessage += 'Error: ' + error.message
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
+
+
