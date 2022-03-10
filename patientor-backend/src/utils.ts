@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
-import { Gender, Patient } from "./types/patientsType";
+import { Entry, Gender, Patient } from "./types/patientsType";
 
 type Fields = {
   name: string,
   dateOfBirth: string,
   ssn: string,
   gender: string,
-  occupation?: string
+  occupation?: string,
+  entries: Entry[]
 };
 
 const isString = (text: unknown): text is string => {
@@ -65,14 +66,15 @@ const parseGender = (gender: unknown): Gender => {
   return gender;
 };
 
-const toNewPatient = ({ name, dateOfBirth, ssn, gender, occupation }: Fields): Patient => {
+const toNewPatient = ({ name, dateOfBirth, ssn, gender, occupation, entries }: Fields): Patient => {
   const newPatient = {
     name: parseName(name),
     dateOfBirth: parseDate(dateOfBirth),
     ssn: parseSsn(ssn),
     gender: parseGender(gender),
     occupation: parseOccupation(occupation),
-    id: parseId(uuidv4())
+    id: parseId(uuidv4()),
+    entries: entries
   };
   return newPatient;
 };
