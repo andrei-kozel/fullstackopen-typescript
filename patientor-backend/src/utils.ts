@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { Entry, Gender, Patient } from "./types/patientsType";
 
@@ -66,6 +66,13 @@ const parseGender = (gender: unknown): Gender => {
   return gender;
 };
 
+const parseEntries = (entries: any): Entry[] => {
+  if (!entries) {
+    throw new Error(`Incorrect or missing entries: ${entries}`);
+  }
+  return entries;
+};
+
 const toNewPatient = ({ name, dateOfBirth, ssn, gender, occupation, entries }: Fields): Patient => {
   const newPatient = {
     name: parseName(name),
@@ -74,7 +81,7 @@ const toNewPatient = ({ name, dateOfBirth, ssn, gender, occupation, entries }: F
     gender: parseGender(gender),
     occupation: parseOccupation(occupation),
     id: parseId(uuidv4()),
-    entries: entries
+    entries: parseEntries(entries)
   };
   return newPatient;
 };

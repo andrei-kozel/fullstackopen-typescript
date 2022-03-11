@@ -76,7 +76,8 @@ const PatientListPage = () => {
               key={patient.id}
               onClick={() => {
                 navigate(`/patients/${patient.id}`);
-              }}>
+              }}
+              style={{ cursor: 'pointer' }}>
               <TableCell>{patient.name}</TableCell>
               <TableCell>{patient.gender}</TableCell>
               <TableCell>{patient.occupation}</TableCell>
